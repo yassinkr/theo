@@ -12,7 +12,7 @@ const mockImages=mochdata.map((url,index)=>({
   url,
 }))
 export default async function HomePage() {
-  Headers();
+
   const posts = await db.query.posts.findMany();
   console.log(posts);
   return (
