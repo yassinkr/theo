@@ -1,5 +1,5 @@
 import {db} from "../server/db/index"
-
+export const dynamic= "force-dynamic"
 const mochdata: string[] =['https://utfs.io/f/5d30af62-28cd-4fee-b455-d43cc4d00143-mbg4sh.png',
 'https://utfs.io/f/918c7273-4863-49a7-a363-553cdcb80af7-mbg4sk.png',
 'https://utfs.io/f/62ffd3be-cb20-468c-b10a-8697c2f77410-mbg4si.png',
@@ -12,6 +12,7 @@ const mockImages=mochdata.map((url,index)=>({
   url,
 }))
 export default async function HomePage() {
+  Headers();
   const posts = await db.query.posts.findMany();
   console.log(posts);
   return (
