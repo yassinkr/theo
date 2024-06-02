@@ -32,7 +32,7 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-      <body className="flex flex-col gap-4">
+      <body className="flex flex-col ">
          <Topnav/>
         {children}
         {modal}

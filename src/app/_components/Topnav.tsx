@@ -7,14 +7,16 @@ export default function Topnav (){
     const router = useRouter();
     return (
         <nav className="flex items-center justify-between w-full p-4 text-xl font-semibold  border-b-black">
-            <div> Gllery</div>
+            <div> Gallery</div>
             <div> 
                 <SignedOut>
                     <SignInButton/>
                 </SignedOut>
-                <SignedIn>
+                <SignedIn >
+                    <div className="flex justify-between gap-4">
                     <UploadButton endpoint="imageUploader" onClientUploadComplete={()=>{router.refresh();}}/>
                     <UserButton/>
+                    </div>
                 </SignedIn>
             </div>
         </nav>
