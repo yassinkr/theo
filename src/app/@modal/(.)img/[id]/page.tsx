@@ -8,7 +8,7 @@ export default  function PhotoModal({
 }
 ){    const idAsNumber= parseInt(photoId)
     if(Number.isNaN(idAsNumber))throw new Error("invalid photo id")
-    return <Modal>{photoId}
+    return <Modal>
            <FullPageImageView id={idAsNumber}/>
     </Modal>
 }
