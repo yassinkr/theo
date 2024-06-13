@@ -32,9 +32,11 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-      <body className="flex flex-col ">
+      <body>
+        <div  className="h-screen  grid grid-rows[auto,1fr] ">
          <Topnav/>
-        {children}
+        <main>{children}</main>
+        </div>
         {modal}
         <div id="modal-root"/>
         </body>
