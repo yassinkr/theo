@@ -1,6 +1,6 @@
-"use client";
 
 import { useUploadThing } from "~/utils/uploadthing";
+import { useRouter } from "next/navigation";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -27,3 +27,22 @@ const useUploadThingInputProps = (...args: Input) => {
     isUploading: $ut.isUploading,
   };
 };
+
+function UploadSvg(){
+  return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+</svg>
+
+}
+export function SimpleUploadButton(){
+  const router = useRouter();
+  const {inputProps}=useUploadThingInputProps("imageUploader",{
+    onClientUploadComplete(){
+      router.refresh();
+    }
+  });
+  return <div className="relative">
+      <label htmlFor="upload-buon"><UploadSvg/></label>
+    <input id="upload-button" type="file" {...inputProps} className="z-10 top-0 w-full h-full absolute left-0 opacity-0 cursor-pointer" />
+  </div>
+}
