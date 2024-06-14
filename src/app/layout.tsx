@@ -7,6 +7,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { Toaster } from "../components/ui/sonner"
+import { CSPostHogProvider } from "./_analytics/provider";
 
 export const metadata = {
   title: "theo",
@@ -24,6 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
+    <CSPostHogProvider>
     <html lang="en" className={`${GeistSans.variable} dark`}>
     <NextSSRPlugin
           /**
@@ -45,6 +47,7 @@ export default function RootLayout({
         <Toaster />
         </body>
     </html>
+    </CSPostHogProvider>
     </ClerkProvider>
   );
 }
