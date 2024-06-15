@@ -26,7 +26,7 @@ export default async function HomePage() {
 
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center  text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center  text-white">
      <SignedOut>
       <div className="w-full h-full text-2xl text-center">
       sign in to seee the images

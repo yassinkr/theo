@@ -5,6 +5,7 @@ import { UploadThingError } from "uploadthing/server";
  import {auth} from "@clerk/nextjs/server"
  import {db} from "~/server/db/index"
 import {images} from "~/server/db/schema"
+import { ratelimit } from "~/server/ratelimit";
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const f = createUploadthing();
  
@@ -12,18 +13,14 @@ const f = createUploadthing();
 // FileRouter for your app, can contain multiple FileRoutes
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 export const ourFileRouter = {
-  // Define as many FileRoutes as you like, each with a unique routeSlug
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount:10 } })
-    // Set permissions and file types for this FileRoute
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    .middleware(async ({ req}) => {
-      // This code runs on your server before upload
-      const user = auth();
+      .middleware(async ({ req}) => {
+
+        const user = auth();
  
-      // If you throw, the user will not be able to upload
       if (!user.userId) throw new UploadThingError("Unauthorized");
- 
+      const { success } = await ratelimit.limit(user.userId);
+      if(!success) throw new UploadThingError("Ratelimited");
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       return { userId: user.userId };
