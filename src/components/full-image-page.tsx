@@ -21,7 +21,7 @@ export default async function FullPageImageView(props :{id :number}){
             <span> created on:</span>
             <span>{new Date(image.createdAt).toLocaleDateString()}</span></div>
             <div className="flex flex-col p-2">
-            <form action={async ()=>{"use server"; deleteImage(image.id)}}>
+            <form action={async ()=>{"use server";await deleteImage(image.id)}}>
                 <Button type="submit" variant="destructive"> Delete</Button></form>
             </div>
     </div>
